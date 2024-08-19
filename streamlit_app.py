@@ -9,7 +9,7 @@ st.set_page_config(
     initial_sidebar_state="auto",
 )
 
-st.title("Llama Prompt Guard")
+st.subheader("Llama Prompt Guard")
 with st.sidebar:
   st.markdown(
     """
