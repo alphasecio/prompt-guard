@@ -6,10 +6,11 @@ from transformers import pipeline
 st.set_page_config(
     page_title="Llama Prompt Guard",
     page_icon=":llama:",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="auto",
 )
+
+st.title("Llama Prompt Guard")
 with st.sidebar:
-  st.title("Llama Prompt Guard")
   st.markdown(
     """
     [Prompt Guard](https://llama.meta.com/docs/model-cards-and-prompt-formats/prompt-guard) is a classifier model by Meta, trained on a large corpus of attacks, capable of detecting both explicitly malicious prompts (*jailbreaks*) as well as data that contains injected inputs (*prompt injections*).
