@@ -5,7 +5,7 @@ Upon analysis, it returns one or more of the following verdicts, along with a co
 * JAILBREAK
 * BENIGN
 
-This repository contains a Streamlit app for testing Prompt Guard. Note that you'll need an [HuggingFace access token](https://huggingface.co/settings/tokens) to access the model.
+This repository contains a Streamlit app for testing Prompt Guard. Note that you'll need an [HuggingFace access token](https://huggingface.co/settings/tokens) to access the model. For a more detailed writeup, see [this](https://alphasec.io/detect-jailbreaks-and-prompt-injections-with-meta-prompt-guard/) blog post.
 
 Here's a sample response by Prompt Guard upon detecting a prompt injection attempt.
 
