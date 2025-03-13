@@ -39,7 +39,7 @@ if analyse:
   elif not prompt.strip():
     st.error("Please provide the prompt to be analysed.")
   else:
-    with st.spinner("Please wait..."):
+    with st.spinner("Please wait...", show_time=True):
       # Set access token environment variable
       os.environ["HUGGINGFACE_ACCESS_TOKEN"] = hf_token
 
