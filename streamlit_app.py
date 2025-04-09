@@ -35,23 +35,23 @@ st.divider()
 # If "Analyse" button is clicked
 if analyse:
   if not hf_token.strip():
-    st.error("Please provide the HuggingFace access token.")
+      st.error("Please provide the HuggingFace access token.")
   elif not prompt.strip():
-    st.error("Please provide the prompt to be analysed.")
+      st.error("Please provide the prompt to be analysed.")
   else:
-    with st.spinner("Please wait...", show_time=True):
       # Set access token environment variable
       os.environ["HUGGINGFACE_ACCESS_TOKEN"] = hf_token
-
+    
       # Check if already logged into HuggingFace
       if not st.session_state.hf_login:
-        try:
-          login(token=hf_token)
-          st.session_state.classifier = pipeline("text-classification", model=hf_model)
-          st.session_state.hf_login = True
-        except Exception as e:
-          st.error(f"An error occurred: {e}")
-
+        with st.spinner("Downloading model from HuggingFace, please wait...", show_time=True):
+            try:
+              login(token=hf_token)
+              st.session_state.classifier = pipeline("text-classification", model=hf_model)
+              st.session_state.hf_login = True
+            except Exception as e:
+              st.error(f"An error occurred: {e}")
+    
       try:
         results = st.session_state.classifier(prompt)
         st.markdown("**Result**")
