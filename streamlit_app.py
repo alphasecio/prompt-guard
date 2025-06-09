@@ -16,9 +16,8 @@ with st.sidebar:
     """
     [Prompt Guard](https://www.llama.com/docs/model-cards-and-prompt-formats/prompt-guard/) is a classifier model by Meta, trained on a large corpus of attacks, capable of detecting both explicitly malicious prompts (*jailbreaks*) as well as data that contains injected inputs (*prompt injections*).
     Upon analysis, it returns one or more of the following verdicts, along with a confidence score for each:
-    * INJECTION
-    * JAILBREAK
-    * BENIGN
+    * `LABEL_0`: Benign (non-malicious input)
+    * `LABEL_1`: Malicious (prompt injection or jailbreak attempt)
     """
   )
   hf_token = st.text_input("HuggingFace access token", type="password", help="Get your access token [here](https://huggingface.co/settings/tokens).")
@@ -31,8 +30,13 @@ if "classifier" not in st.session_state:
 
 hf_model = "meta-llama/Llama-Prompt-Guard-2-86M"
 
+label_map = {
+    "LABEL_0": "BENIGN",
+    "LABEL_1": "MALICIOUS"
+}
+
 with st.form("my_form"):
-  prompt = st.text_area("Enter your prompt here", height=200)
+  prompt = st.text_area("Enter your prompt here", height=100)
   analyse = st.form_submit_button("Analyse")
           
 # If "Analyse" button is clicked
@@ -55,8 +59,11 @@ if analyse:
     
       try:
         results = st.session_state.classifier(prompt)
-        st.markdown("**Result**")
         for result in results:
-          st.write(f"{result['label']}: {result['score']:.4f}")
+          label = label_map.get(result['label'], result['label'])
+          color = "green" if label == "BENIGN" else "red"
+          icon = ":material/check:" if label == "BENIGN" else ":material/warning:"
+          st.badge(label, color=color, icon=icon)
+          st.metric(label="Confidence", value=f"{result['score']:.2%}")
       except Exception as e:
         st.error(f"An error occurred during classification: {e}")
