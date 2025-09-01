@@ -1,4 +1,4 @@
 streamlit==1.47.1
-torch==2.7.1
+torch==2.8.0
 huggingface-hub==0.34.3
 transformers==4.55.0
