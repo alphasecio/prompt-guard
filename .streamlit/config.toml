@@ -1,0 +1,8 @@
+[server]
+# Streamlit's source watcher walks sys.modules and touches __path__ on each entry,
+# which forces transformers' lazy submodules to import and raises spurious
+# ModuleNotFoundError tracebacks for optional dependencies (torchvision, av, etc).
+fileWatcherType = "none"
+
+[browser]
+gatherUsageStats = false
