@@ -1,5 +1,5 @@
 --extra-index-url https://download.pytorch.org/whl/cpu
-torch==2.12.0+cpu
-streamlit==1.58.0
-huggingface-hub==1.18.0
-transformers==5.10.2
+torch==2.13.0+cpu
+streamlit==1.61.0
+huggingface-hub==1.26.0
+transformers==5.14.1
